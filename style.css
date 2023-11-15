@@ -1,0 +1,19 @@
+html{
+    background-color: #f8d3cf;
+}
+.patinhas{
+    left: 50px;
+}
+.bg{
+    background-color: #d7964a;
+}
+
+.text{
+    font-family: 'Noto Serif', serif;
+    font-family: 'Playfair Display', serif;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+}
