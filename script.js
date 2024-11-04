@@ -1,59 +1,38 @@
-var textoIntrodutorio = document.querySelector('.intro');
-var primeiroInput = document.querySelector('#valorUm');
-var btnEuro = document.querySelector('#euro');
-const dolarButton = document.querySelector('#dolar');
-const goldButton = document.querySelector('#gold');
-const audioElement = new Audio('../Conversor-de-Dinheiro/songs/y2meta.com_-_Som_moeda_caindo_efeito_sonoro_jogando_moedas_320_kbps (1).mp3');
-audioElement.volume = 0.2;
+var resultado;
 
-
-
-
-let clicadoGoldButton = false;
-let clicadoDolarButton = false;
-let valorInput = primeiroInput.value;
-let umDolarEmReais = 4.87;
-let realEmPesosArgentinos =  71.95;
-let resultadoDolar = valorInput*umDolarEmReais;
-let resultadoPesos = valorInput*realEmPesosArgentinos;
-
-
-dolarButton.addEventListener('click', () => {
-    audioElement.play();
-    textoIntrodutorio.innerHTML = `Convertendo de Reais para Dolares &#129297`;
-    
-    let valorInput = primeiroInput.value;
-    let umDolarEmReais = 4.87;
-    let resultadoDolar = valorInput * umDolarEmReais;
-
-    textoIntrodutorio.innerHTML = `$   `+resultadoDolar;
-    
-    audioElement.play();
-});
-  
-goldButton.addEventListener('click', () => {
-    audioElement.play();
-    textoIntrodutorio.innerHTML = `Convertendo de Reais em Ouro 🟨"`;
-
-    let valorInput = primeiroInput.value;
-    let realEmPesosArgentinos = 71.95;
-    let resultadoPesos = valorInput * realEmPesosArgentinos;
-
-
-    textoIntrodutorio.innerHTML = `$   `+resultadoPesos;
+$.ajax({
+    type: "GET",
+    dataType: "JSON",
+    url: "https://economia.awesomeapi.com.br/json/all",
+    success: function (data) {
+        resultado = data;
+    },
+    error: function () {
+        alert('Erro! O site não conseguiu carregar os valores atuais da cotação. Tente novamente mais tarde. :(');
+    }
 });
 
-btnEuro.addEventListener('click', ()=>{
-    audioElement.play();
-    let valorInput = primeiroInput.value;
-    let realEmEuro = 0.19;
-    let resultadoEuro = valorInput * realEmEuro;
+function converter(moeda) {
+    var numeroDigitado = parseFloat(document.getElementById("entrada").value);
+    var saida = document.getElementById("saida");
+    var valorMoeda;
 
-    textoIntrodutorio.innerHTML = `$   `+resultadoEuro;
-})
+    // Obtém o valor da cotação baseado na moeda selecionada
+    if (moeda === "USD") valorMoeda = parseFloat(resultado?.USD?.bid);
+    else if (moeda === "ARS") valorMoeda = parseFloat(resultado?.ARS?.bid);
+    else if (moeda === "EUR") valorMoeda = parseFloat(resultado?.EUR?.bid);
 
+    if (isNaN(numeroDigitado) || numeroDigitado <= 0) {
+        alert("Digite um valor válido e positivo.");
+        return;
+    }
 
-
+    // Calcula a conversão de reais (BRL) para a moeda selecionada
+    var calculo = numeroDigitado / valorMoeda;
+    var valorFormatado = numeroDigitado.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    var calculoFormatado = calculo.toLocaleString('en-US', { style: 'currency', currency: moeda });
+    saida.innerHTML = `Resultado: ${valorFormatado} = ${calculoFormatado}`;
+}
 
 
 
