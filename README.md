@@ -1,4 +1,13 @@
 **1- Conversor do Tio Patinhas**
 
 
-![patoSite](https://github.com/user-attachments/assets/38f91b62-31ed-4554-a95a-3e2e660590bc)
+![patoSite](https://github.com/user-attachments/assets/0cc76eb3-6b08-46ea-9c74-25f879578666)
+
+
+**Foi Utilizado uma API:**
+
+https://docs.awesomeapi.com.br/api-de-moedas
+
+**GitHub - DOCUMENTAÇÃO DA API**:
+
+https://github.com/raniellyferreira/economy-api
