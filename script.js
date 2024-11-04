@@ -27,7 +27,6 @@ function converter(moeda) {
         return;
     }
 
-    // Calcula a conversão de reais (BRL) para a moeda selecionada
     var calculo = numeroDigitado / valorMoeda;
     var valorFormatado = numeroDigitado.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     var calculoFormatado = calculo.toLocaleString('en-US', { style: 'currency', currency: moeda });
